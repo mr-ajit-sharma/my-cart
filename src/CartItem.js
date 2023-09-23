@@ -9,6 +9,7 @@ class MyCart extends React.Component{
         }
     }
     render(){
+        let {name,qty,price}=this.state
         return(
             <div className='main'>
             <div className='after-main'>
