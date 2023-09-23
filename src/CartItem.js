@@ -5,9 +5,24 @@ class MyCart extends React.Component{
         this.state={
             name:"I phone",
             qty:5,
-            price:10000
+            price:1000,
+            img:''
         }
+        
     }
+    increament(){
+        console.log("increament is working",this.state)
+      
+    }
+    decreament(){
+
+        console.log("decreament is working",this.state)
+    }
+    deleteCart(){
+        console.log("delete is working",this.state)
+        
+     }
+  
     render(){
         let {name,qty,price}=this.state
         return(
@@ -23,9 +38,9 @@ class MyCart extends React.Component{
                         <div style={{color:"#777"}}>price:Rs. <span>{price}</span></div>
                     </div>
                     <div className='action-icon'>
-                        <img src='https://cdn-icons-png.flaticon.com/128/1828/1828919.png' className='icon' alt=''></img>
-                        <img src='https://cdn-icons-png.flaticon.com/128/1828/1828899.png' className='icon' alt=''></img>
-                        <img src='https://cdn-icons-png.flaticon.com/128/6861/6861362.png' className='icon' alt=''></img>
+                        <img onClick={this.increament.bind(this)}  src='https://cdn-icons-png.flaticon.com/128/1828/1828919.png' className='icon' alt=''></img>
+                        <img onClick={this.decreament.bind(this)} src='https://cdn-icons-png.flaticon.com/128/1828/1828899.png' className='icon' alt=''></img>
+                        <img onClick={this.deleteCart.bind(this)}  src='https://cdn-icons-png.flaticon.com/128/6861/6861362.png' className='icon' alt=''></img>
                     </div>
                 </div>
             </div>
@@ -33,6 +48,7 @@ class MyCart extends React.Component{
         )
     }
 }
+
 let styles;
 styles={
     images:{
