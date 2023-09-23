@@ -35,6 +35,7 @@
 .after-main{
   border: 2px solid black;
   width: 20%;
+  height: 7em;
   display: flex;
 }
 .product-image{
