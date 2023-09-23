@@ -34,23 +34,23 @@ class MyCart extends React.Component {
         // here setstate is the predefined key or method in which it set the state 
         // first form
 
-        // this.setState({
-        //     qty: this.state.qty + 1
-        // })
-this.setState(prev=>{
-    return {
-        qty:prev.qty+2
-    }
-},()=>{
-    console.log(this.state.qty)
-})
-this.setState(prev=>{
-    return {
-        qty:prev.qty+3
-    }
-},()=>{
-    console.log(this.state.qty)
-})
+        this.setState({
+            qty: this.state.qty + 1
+        })
+// this.setState(prev=>{
+//     return {
+//         qty:prev.qty+2
+//     }
+// },()=>{
+//     console.log(this.state.qty)
+// })
+// this.setState(prev=>{
+//     return {
+//         qty:prev.qty+3
+//     }
+// },()=>{
+//     console.log(this.state.qty)
+// })
         // second form
         // in this we have contained the this object prev already so we dont have to define
         // this.setState((prev) => {
@@ -133,6 +133,7 @@ let styles;
 styles = {
     images: {
         background: 'cyan',
+    
     }
 }
 export default MyCart
