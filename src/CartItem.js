@@ -111,8 +111,8 @@ class MyCart extends React.Component {
                             <div style={{ color: "#777" }}>price: <span style={{ color: "black" }}>Rs. {price * qty}</span></div>
                         </div>
                         <div className='action-icon'>
-                            <img onClick={this.increament.bind(this)} src='https://cdn-icons-png.flaticon.com/128/1828/1828919.png' className='icon' alt=''></img>
-                            <img onClick={this.decreament.bind(this)} src='https://cdn-icons-png.flaticon.com/128/1828/1828899.png' className='icon' alt=''></img>
+                            <img onClick={()=>this.props.onIncrease(this.props.product)} src='https://cdn-icons-png.flaticon.com/128/1828/1828919.png' className='icon' alt=''></img>
+                            <img onClick={()=>this.props.onDecrease(this.props.product)} src='https://cdn-icons-png.flaticon.com/128/1828/1828899.png' className='icon' alt=''></img>
                             <img onClick={this.deleteCart.bind(this)} src='https://cdn-icons-png.flaticon.com/128/6861/6861362.png' className='icon' alt=''></img>
                         </div>
                     </div>
