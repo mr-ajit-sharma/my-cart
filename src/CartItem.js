@@ -1,16 +1,7 @@
 import React from 'react'
 class MyCart extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            name: "I phone",
-            qty: 1,
-            price: 1000,
-            img: ''
-        }
-        // this.testing()
-
-    }
+    
+    // this.testing()
 
     // here we are testing 
     // testing() {
@@ -103,10 +94,12 @@ class MyCart extends React.Component {
 
     render() {
         // this.setState({qty:this.state.qty+5})
-        let { name, qty, price } = this.state
+        console.log('this.props',this.props)
+        let { name, qty, price } = this.props.product
         console.log(this.state)
         return (
             <div className='main'>
+                {this.props.jsx}
                 <div className='after-main' style={{margin:2}}>
                     <div className='product-image'>
                         <img className='product-image-item' style={styles.images} src='https://t4.ftcdn.net/jpg/01/87/36/45/240_F_187364576_YxpCOYDgfAFSCDQhgysfvp4hYZ05qRWE.jpg' alt='' />

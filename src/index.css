@@ -18,12 +18,12 @@ code {
 }
 .after-main{
   border: 2px solid black;
-  width: 30%;
+  width: 20%;
   height: 7em;
   display: flex;
 }
 .product-image{
-width: 50%;
+width: 40%;
   border: 2px solid red;
 }
 .product-image-item{
