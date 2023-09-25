@@ -45,10 +45,24 @@ handleDecreaseQuantity=(product)=>{
 console.log("plz decrease the quantity",product)    
 const {products}=this.state
 const index=products.indexOf(product)
+if(products[index].qty===0){
+    return;
+}
 products[index].qty-=1
 
 this.setState({
     products:products
+})
+}
+
+handleDeleteQuantity=(id)=>{
+const {products}=this.state;
+const items=products.filter((item)=>{
+    item.id!==id
+
+})
+this.setState({
+    products:items
 })
 }
         
@@ -62,6 +76,7 @@ this.setState({
                      key={product.id}
                      onIncrease={this.handleIncreaseQuantity}
                      onDecrease={this.handleDecreaseQuantity}
+                     onDelete={this.handleDeleteQuantity}
                      /></div>
                 })}
                 
