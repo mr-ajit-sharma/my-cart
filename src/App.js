@@ -72,6 +72,7 @@ class App extends React.Component {
       products: items
     })
   }
+  
   getCountProduct = ()=>{
     const {products}=this.state
     let count=0;
@@ -102,7 +103,7 @@ return cartTotal
           onDecrease={this.handleDecreaseQuantity}
           onDelete={this.handleDeleteQuantity}
         /></div>
-        <div >
+        <div  style={{display:'flex', fontSize:20,fontStyle:'bold'}}>
           Total:{this.getTotal()}
         </div>
       </div>
