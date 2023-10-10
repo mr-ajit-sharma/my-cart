@@ -3,63 +3,54 @@ import './App.css';
 import Cart from './Cart';
 import Navbar from './Navbar';
 
+// here we are handling  the database
+import db from './Firebase'
+import { collection, getDocs } from 'firebase/firestore';
+
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       products: [
-        {
-          name: "I phone",
-          qty: 1,
-          price: 1000,
-          img: 'https://images.unsplash.com/photo-1546054454-aa26e2b734c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bW9iaWxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60',
-          id: 1
-        },
-        {
-          name: "safari",
-          qty: 2,
-          price: 20000,
-          img: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2FyfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60',
-          id: 5
-        },
-        {
-          name: "Bike",
-          qty: 2,
-          price: 4000,
-          img: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmlrZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60',
-          id: 2
-        },
-        {
-          name: "laptop",
-          qty: 5,
-          price: 11000,
-          img: 'https://images.unsplash.com/photo-1610465299993-e6675c9f9efa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGFwdG9wJTIwd2FsbHBhcGVyfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60',
-          id: 3
-        },
       ]
     }
   }
 
-  handleIncreaseQuantity = (product) => {
-    console.log("plz increase the product", product)
-    const { products } = this.state
-    const index = products.indexOf(product);
-    products[index].qty += 1
-    this.setState({
-      products: products
-    })
 
+  getData = async () => {
+    const snapshot = await getDocs(collection(db, "products"))
+    const products = snapshot.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data()
+      }
+    })
+    this.setState({
+      products,
+      loading: false
+    })
   }
 
+  componentDidMount() {
+    this.getData()
+  }
+
+  handleIncreaseQuantity = (product) => {
+      const { products } = this.state
+      const index = products.indexOf(product);
+      products[index].qty += 1
+      this.setState({
+          products: products
+        })
+      }
+
   handleDecreaseQuantity = (product) => {
-    console.log("plz decrease the quantity", product)
     const { products } = this.state
     const index = products.indexOf(product)
     if (products[index].qty === 0) {
       return;
     }
     products[index].qty -= 1
-
     this.setState({
       products: products
     })
@@ -72,26 +63,36 @@ class App extends React.Component {
       products: items
     })
   }
-  
-  getCountProduct = ()=>{
-    const {products}=this.state
-    let count=0;
-    products.forEach((product)=>{
-      count+=product.qty
+
+  // getCountProduct = () => {
+  //   const { products } = this.state
+  //   let count = 0;
+  //   products.forEach((product) => {
+  //     count += Number(product.qty)
+  //   })
+  //   return count
+  // }
+
+  getCountProduct = () => {
+    const { products } = this.state
+    let count = 0;
+    products.forEach((product) => {
+      count += Number(product.qty)
     })
     return count
   }
 
-  getTotal=()=>{
-const {products}=this.state
-let cartTotal=0
-products.map((product)=>{
-  cartTotal=cartTotal+product.qty*product.price
-})
-return cartTotal
-  }
-  render() {
+  getTotal = () => {
     const { products } = this.state
+    let cartTotal = 0
+    products.map((product) => {
+      cartTotal = cartTotal + product.qty * product.price
+    })
+    return cartTotal
+  }
+
+  render() {
+    const { products, loading } = this.state
     return (
       <div className="App">
         <div><Navbar
@@ -103,7 +104,8 @@ return cartTotal
           onDecrease={this.handleDecreaseQuantity}
           onDelete={this.handleDeleteQuantity}
         /></div>
-        <div  style={{display:'flex', fontSize:20,fontStyle:'bold'}}>
+        {loading && <h1>Loading...</h1>}
+        <div style={{ display: 'flex', fontSize: 20, fontStyle: 'bold' }}>
           Total:{this.getTotal()}
         </div>
       </div>
